@@ -31,4 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
-ai-service/__pycache__/main.cpython-314.pyc
+
+### Python ###
+ai-service/venv/
+ai-service/__pycache__/
+ai-service/*.pyc
+ai-service/*.pyo
