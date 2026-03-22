@@ -25,7 +25,7 @@ public class Controller {
         this.textSanitizer = textSanitizer;
         this.aiVerificationClient = aiVerificationClient;
     }
-
+    // main entry
     @GetMapping("clean")
     public String cleanText(@RequestParam String text) {
         String layer1 = textSanitizer.sanitize(text);
