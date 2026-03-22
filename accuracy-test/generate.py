@@ -40,11 +40,6 @@ def make_credit_card():
 
 # --- templates ---
 
-KNOWN_ORGS = [
-    "Google", "Microsoft", "Amazon", "Apple", "Meta", "IBM",
-    "Intel", "Oracle", "Salesforce", "Adobe", "Netflix", "Spotify",
-    "Uber", "Airbnb", "Twitter", "LinkedIn", "Samsung", "Sony",
-]
 
 SINGLE_ENTITY_TEMPLATES = [
     ("My name is {name}.", [("PERSON", "{name}")]),
@@ -100,7 +95,7 @@ HEBREW_PREFIX_TEMPLATES = [
 
 NEGATIVE_TEMPLATES = [
     "Please review the attached document.",
-    "Our quarterly results exceeded expectations.",
+    "Our performance metrics exceeded expectations.",
     "The new policy will take effect immediately.",
     "The server was updated successfully.",
     "All team members should attend the standup.",
@@ -123,7 +118,6 @@ def fill_template(template, entity_defs):
     values = {
         "{name}": fake.name(),
         "{city}": fake.city(),
-        "{org}": random.choice(KNOWN_ORGS),
         "{date}": fake.date_this_decade().strftime("%B %d, %Y"),
         "{phone}": make_phone(),
         "{email}": fake.email(),

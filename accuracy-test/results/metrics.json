@@ -27,11 +27,11 @@
       "fn": 0
     },
     "both": {
-      "precision": 0.8,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1": 0.889,
+      "f1": 1.0,
       "tp": 60,
-      "fp": 15,
+      "fp": 0,
       "fn": 0
     }
   },
@@ -82,11 +82,11 @@
     },
     "both": {
       "precision": 1.0,
-      "recall": 0.856,
-      "f1": 0.922,
-      "tp": 77,
+      "recall": 0.833,
+      "f1": 0.909,
+      "tp": 75,
       "fp": 0,
-      "fn": 13
+      "fn": 15
     }
   },
   "PERSON": {
@@ -128,11 +128,11 @@
   "_meta": {
     "overall_macro_f1": {
       "layer1": 0.571,
-      "both": 0.967
+      "both": 0.981
     },
     "latency": {
-      "layer1_avg_ms": 13.2,
-      "both_avg_ms": 17.1
+      "layer1_avg_ms": 12.6,
+      "both_avg_ms": 17.3
     },
     "dataset_size": 855
   }

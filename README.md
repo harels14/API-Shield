@@ -82,6 +82,16 @@ response = client.chat.completions.create(
 
 ---
 
+## Accuracy
+
+Tested on 855 synthetic examples covering single-entity, multi-entity, edge cases, and negative (no-PII) inputs.
+
+![Accuracy Summary](accuracy-test/results/charts/summary.png)
+
+Overall Macro F1: **0.981** across 7 entity types. Full methodology and per-entity breakdown in [accuracy-test/README.md](accuracy-test/README.md).
+
+---
+
 ## Stack
 
 - **Spring Boot 4** - REST API, regex detection, WebFlux HTTP client

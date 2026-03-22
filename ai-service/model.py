@@ -1,8 +1,16 @@
-from presidio_analyzer import AnalyzerEngine
+from presidio_analyzer import AnalyzerEngine, PatternRecognizer, Pattern
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.entities import OperatorConfig
 
+date_recognizer = PatternRecognizer(
+    supported_entity="DATE_TIME",
+    patterns=[
+        Pattern("DATE_MONTH_YEAR", r"\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b", 0.85),
+    ],
+)
+
 analyzer = AnalyzerEngine()
+analyzer.registry.add_recognizer(date_recognizer)
 anonymizer = AnonymizerEngine()
 
 # Entity types that regex (layer 1) cannot reliably detect
@@ -22,6 +30,7 @@ def second_layer_clean(text: str) -> dict:
         text=text,
         language="en",
         entities=ENTITIES_TO_DETECT,
+        score_threshold=0.6,
     )
 
     anonymized = anonymizer.anonymize(
