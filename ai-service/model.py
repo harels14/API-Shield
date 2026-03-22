@@ -6,7 +6,7 @@ analyzer = AnalyzerEngine()
 anonymizer = AnonymizerEngine()
 
 # Entity types that regex (layer 1) cannot reliably detect
-ENTITIES_TO_DETECT = ["LOCATION", "PERSON", "DATE_TIME", "NRP", "ORG"]
+ENTITIES_TO_DETECT = ["LOCATION", "PERSON", "DATE_TIME", "NRP"]
 
 # Map each Presidio entity to a placeholder tag
 OPERATOR_CONFIG = {
@@ -14,7 +14,6 @@ OPERATOR_CONFIG = {
     "PERSON":    OperatorConfig("replace", {"new_value": "[PERSON]"}),
     "DATE_TIME": OperatorConfig("replace", {"new_value": "[DATE]"}),
     "NRP":       OperatorConfig("replace", {"new_value": "[NRP]"}),
-    "ORG":       OperatorConfig("replace", {"new_value": "[ORG]"}),
 }
 
 

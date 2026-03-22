@@ -1,6 +1,5 @@
 package com.example.project.demo.controller;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +36,8 @@ public class Controller {
     
 
     @GetMapping("detect")
-    public String detectText(@RequestParam String text) {
-        List<DetectionResult> results = sensitiveDataDetector.detect(text);
-        return results.stream()
-                .map(DetectionResult::toString)
-                .collect(Collectors.joining(" - "));
+    public List<DetectionResult> detectText(@RequestParam String text) {
+        return sensitiveDataDetector.detect(text);
     }
 
 }

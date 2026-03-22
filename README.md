@@ -23,11 +23,21 @@ Statistical model for unstructured PII: names, locations, organizations, dates.
 
 ---
 
-## Deploy
+## Run locally
 
 ```bash
 git clone https://github.com/harels12/api-shield
 cd api-shield
+docker-compose up --build -d
+```
+
+Service available at `http://localhost:8080`.
+
+---
+
+## Deploy to Kubernetes
+
+```bash
 kubectl apply -f k8s/namespace.yaml
 kubectl apply -f k8s/
 ```

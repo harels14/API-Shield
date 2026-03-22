@@ -1,0 +1,139 @@
+{
+  "CREDIT_CARD": {
+    "layer1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 90,
+      "fp": 0,
+      "fn": 0
+    },
+    "both": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 90,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "DATE": {
+    "layer1": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    "both": {
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.889,
+      "tp": 60,
+      "fp": 15,
+      "fn": 0
+    }
+  },
+  "EMAIL": {
+    "layer1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 165,
+      "fp": 0,
+      "fn": 0
+    },
+    "both": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 165,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "ISRAELI_ID": {
+    "layer1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 125,
+      "fp": 0,
+      "fn": 0
+    },
+    "both": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 125,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "LOCATION": {
+    "layer1": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    "both": {
+      "precision": 1.0,
+      "recall": 0.856,
+      "f1": 0.922,
+      "tp": 77,
+      "fp": 0,
+      "fn": 13
+    }
+  },
+  "PERSON": {
+    "layer1": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    "both": {
+      "precision": 1.0,
+      "recall": 0.922,
+      "f1": 0.96,
+      "tp": 332,
+      "fp": 0,
+      "fn": 28
+    }
+  },
+  "PHONE_NUMBER": {
+    "layer1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 125,
+      "fp": 0,
+      "fn": 0
+    },
+    "both": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 125,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "_meta": {
+    "overall_macro_f1": {
+      "layer1": 0.571,
+      "both": 0.967
+    },
+    "latency": {
+      "layer1_avg_ms": 13.2,
+      "both_avg_ms": 17.1
+    },
+    "dataset_size": 855
+  }
+}

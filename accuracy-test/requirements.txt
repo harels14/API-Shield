@@ -1,0 +1,7 @@
+faker
+requests
+matplotlib
+seaborn
+pandas
+numpy
+scikit-learn
