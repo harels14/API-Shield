@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from model import second_layer_clean
 
+
+# to run: uvicorn main:app --host 0.0.0.0 --port 8000
+
+
 app = FastAPI()
 
 
