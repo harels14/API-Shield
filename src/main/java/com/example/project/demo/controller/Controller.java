@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.project.demo.client.AiVerificationClient;
 import com.example.project.demo.model.DetectionResult;
 import com.example.project.demo.service.detection.SensitiveDataDetector;
 import com.example.project.demo.service.tokenization.TextSanitizer;
@@ -17,15 +18,18 @@ public class Controller {
 
     private final SensitiveDataDetector sensitiveDataDetector;
     private final TextSanitizer textSanitizer;
+    private final AiVerificationClient aiVerificationClient;
 
-    public Controller(SensitiveDataDetector sensitiveDataDetector, TextSanitizer textSanitizer) {
+    public Controller(SensitiveDataDetector sensitiveDataDetector, TextSanitizer textSanitizer, AiVerificationClient aiVerificationClient) {
         this.sensitiveDataDetector = sensitiveDataDetector;
         this.textSanitizer = textSanitizer;
+        this.aiVerificationClient = aiVerificationClient;
     }
 
     @GetMapping("clean")
     public String cleanText(@RequestParam String text) {
-        return textSanitizer.sanitize(text);
+        String layer1 = textSanitizer.sanitize(text);
+        return aiVerificationClient.verify(layer1);
     }
 
 
