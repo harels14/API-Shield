@@ -2,7 +2,7 @@
 
 PII sanitization middleware for AI-integrated services.
 
-When your application forwards user input to an external AI provider, sensitive data such as names, IDs, phone numbers, and emails leaves your infrastructure. API Shield intercepts that data before it's sent, strips the PII, and returns clean text — with no changes to your existing flow.
+When your application forwards user input to an external AI provider, sensitive data such as names, IDs, phone numbers, and emails leaves your infrastructure. API Shield intercepts that data before it's sent, strips the PII, and returns clean text - with no changes to your existing flow.
 
 ```
 your service  →  API Shield  →  ChatGPT / Claude / Gemini
@@ -15,10 +15,10 @@ Deploys as an independent microservice in your existing K8s cluster. No infrastr
 
 ## Sanitization layers
 
-**Layer 1 — Regex** (Spring Boot)
+**Layer 1 - Regex** (Spring Boot)
 Deterministic, sub-millisecond detection of structured PII: Israeli IDs, credit cards, phone numbers, emails.
 
-**Layer 2 — NLP** (Presidio + spaCy)
+**Layer 2 - NLP** (Presidio + spaCy)
 Statistical model for unstructured PII: names, locations, organizations, dates.
 
 ---
@@ -51,7 +51,7 @@ Detect without sanitizing:
 GET /detect?text=<input>
 ```
 
-#### Example — sanitize before sending to OpenAI
+#### Example - sanitize before sending to OpenAI
 
 ```python
 # before
@@ -74,9 +74,9 @@ response = client.chat.completions.create(
 
 ## Stack
 
-- **Spring Boot 4** — REST API, regex detection, WebFlux HTTP client
-- **FastAPI** — Python service
-- **Presidio + spaCy** — NLP entity recognition
-- **Docker** — multi-stage builds
-- **Kubernetes** — independent scaling, resource limits, internal DNS
-- **GitHub Actions** — image build and push on every commit to main
+- **Spring Boot 4** - REST API, regex detection, WebFlux HTTP client
+- **FastAPI** - Python service
+- **Presidio + spaCy** - NLP entity recognition
+- **Docker** - multi-stage builds
+- **Kubernetes** - independent scaling, resource limits, internal DNS
+- **GitHub Actions** - image build and push on every commit to main
