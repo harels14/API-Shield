@@ -34,15 +34,7 @@ public class SensitiveDataDetector {
             PHONE_NUMBER_PATTERN, SensitiveDataType.PHONE_NUMBER,
             EMAIL_PATTERN, SensitiveDataType.EMAIL);
 
-    /**
-     * Takes a text string and returns all matches found across every pattern.
-     * Each result includes the type, the matched value, and where it was found in
-     * the text.
-     * Returns an empty list if nothing was found.
-     *
-     * @param text the text to scan
-     * @return list of detection results
-     */
+    /** Scans text against all patterns and returns every match found. */
     public List<DetectionResult> detect(String text) {
         List<DetectionResult> results = new ArrayList<>();
         for (Map.Entry<Pattern, SensitiveDataType> entry : PATTERNS.entrySet()) {
@@ -53,16 +45,7 @@ public class SensitiveDataDetector {
 
     }
 
-    /**
-     * Runs a single regex pattern against the text and collects all matches.
-     * For each match it records the sensitive data type, the matched string, and
-     * the start/end positions.
-     *
-     * @param text    the text to scan
-     * @param pattern the regex pattern to apply
-     * @param type    the sensitive data type this pattern looks for
-     * @return list of matches found for this pattern
-     */
+    // Runs one pattern and validates each match (Luhn check for IDs and credit cards)
     private List<DetectionResult> detectByPattern(String text, Pattern pattern, SensitiveDataType type) {
         if (text == null || pattern == null || type == null) {
             return Collections.emptyList();

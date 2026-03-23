@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+/**
+ * Sends text to the external AI service for a second verification pass.
+ * If the call fails for any reason, falls back to whatever was passed in.
+ */
 @Component
 public class AiVerificationClient {
 

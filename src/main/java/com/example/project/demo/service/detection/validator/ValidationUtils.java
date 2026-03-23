@@ -1,5 +1,8 @@
 package com.example.project.demo.service.detection.validator;
 
+/**
+ * Format and checksum validation to cut down false positives from the regex patterns.
+ */
 public final class ValidationUtils {
 
     public static boolean isValidIsraeliId(String id) {
@@ -14,6 +17,7 @@ public final class ValidationUtils {
     }
 
 
+    // Luhn checksum: alternate digits are doubled from the right, sum must be divisible by 10
     private static boolean LuhnAlgorithm(String number) {
         int sum = 0;
         boolean alternate = false;

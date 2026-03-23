@@ -14,6 +14,10 @@ import com.example.project.demo.model.DetectionResult;
 import com.example.project.demo.service.detection.SensitiveDataDetector;
 import com.example.project.demo.service.tokenization.TextSanitizer;
 
+/**
+ * Entry point for the API. Two endpoints: /clean runs the full sanitization
+ * pipeline (regex + AI verification), /detect just reports what was found.
+ */
 @RestController
 @RequestMapping
 public class Controller {

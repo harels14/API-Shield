@@ -21,14 +21,7 @@ public class TextSanitizer {
         this.detector = detector;
     }
 
-    /**
-     * Detects all sensitive data in the text and replaces each match with
-     * the placeholder defined by its {@link com.example.project.demo.model.SensitiveDataType}.
-     * Replacements are applied from end to start to keep indices stable.
-     *
-     * @param text the original text
-     * @return the sanitized text with sensitive values replaced by their type placeholder
-     */
+    /** Replaces all detected PII with its placeholder. Works end-to-start so indices stay valid. */
     public String sanitize(String text) {
         if (text == null || text.isBlank()) {
             return text;

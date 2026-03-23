@@ -18,8 +18,6 @@ End-to-end accuracy test for API Shield's two-layer PII detection pipeline.
 
 ![Coverage by Layer](results/charts/coverage_by_layer.png)
 
-![Combined F1](results/charts/combined_f1.png)
-
 ![Latency](results/charts/latency.png)
 
 ---
