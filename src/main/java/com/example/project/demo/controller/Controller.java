@@ -1,6 +1,9 @@
 package com.example.project.demo.controller;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +18,8 @@ import com.example.project.demo.service.tokenization.TextSanitizer;
 @RequestMapping
 public class Controller {
 
+    private static final Logger log = LoggerFactory.getLogger(Controller.class);
+
     private final SensitiveDataDetector sensitiveDataDetector;
     private final TextSanitizer textSanitizer;
     private final AiVerificationClient aiVerificationClient;
@@ -24,20 +29,31 @@ public class Controller {
         this.textSanitizer = textSanitizer;
         this.aiVerificationClient = aiVerificationClient;
     }
+
     // main entry
     @GetMapping("clean")
-    public String cleanText(@RequestParam String text) {
+    public ResponseEntity<String> cleanText(@RequestParam(required = false) String text) {
+        if (text == null || text.isBlank()) {
+            log.warn("Received empty or null text on /clean");
+            return ResponseEntity.badRequest().body("text is required");
+        }
+        log.info("Sanitizing text of length {}", text.length());
         String layer1 = textSanitizer.sanitize(text);
-        return aiVerificationClient.verify(layer1);
+        String result = aiVerificationClient.verify(layer1);
+        log.info("Sanitization complete");
+        return ResponseEntity.ok(result);
     }
 
-
-
-    
-
     @GetMapping("detect")
-    public List<DetectionResult> detectText(@RequestParam String text) {
-        return sensitiveDataDetector.detect(text);
+    public ResponseEntity<?> detectText(@RequestParam(required = false) String text) {
+        if (text == null || text.isBlank()) {
+            log.warn("Received empty or null text on /detect");
+            return ResponseEntity.badRequest().body("text is required");
+        }
+        log.info("Detecting PII in text of length {}", text.length());
+        List<DetectionResult> results = sensitiveDataDetector.detect(text);
+        log.info("Detection found {} result(s)", results.size());
+        return ResponseEntity.ok(results);
     }
 
 }

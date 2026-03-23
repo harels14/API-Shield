@@ -1,10 +1,14 @@
 package com.example.project.demo.client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-@Service
+@Component
 public class AiVerificationClient {
+
+    private static final Logger log = LoggerFactory.getLogger(AiVerificationClient.class);
 
     private final WebClient webClient;
 
@@ -18,7 +22,10 @@ public class AiVerificationClient {
             .retrieve()
             .bodyToMono(VerifyResponse.class)
             .map(VerifyResponse::cleaned)
-            .onErrorReturn(text)  
+            .onErrorResume(e -> {
+                log.warn("AI verification failed, falling back to layer-1 result: {}", e.getMessage());
+                return reactor.core.publisher.Mono.just(text);
+            })
             .block();
     }
 
