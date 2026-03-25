@@ -34,13 +34,19 @@ public class Controller {
         this.aiVerificationClient = aiVerificationClient;
     }
 
+    private ResponseEntity<String> validateTextParam(String text, String endpoint) {
+        if (text == null || text.isBlank()) {
+            log.warn("Received empty or null text on /{}", endpoint);
+            return ResponseEntity.badRequest().body("text is required");
+        }
+        return null;
+    }
+
     // main entry
     @GetMapping("clean")
     public ResponseEntity<String> cleanText(@RequestParam(required = false) String text) {
-        if (text == null || text.isBlank()) {
-            log.warn("Received empty or null text on /clean");
-            return ResponseEntity.badRequest().body("text is required");
-        }
+        ResponseEntity<String> error = validateTextParam(text, "clean");
+        if (error != null) return error;
         log.info("Sanitizing text of length {}", text.length());
         String layer1 = textSanitizer.sanitize(text);
         String result = aiVerificationClient.verify(layer1);
@@ -50,10 +56,8 @@ public class Controller {
 
     @GetMapping("detect")
     public ResponseEntity<?> detectText(@RequestParam(required = false) String text) {
-        if (text == null || text.isBlank()) {
-            log.warn("Received empty or null text on /detect");
-            return ResponseEntity.badRequest().body("text is required");
-        }
+        ResponseEntity<String> error = validateTextParam(text, "detect");
+        if (error != null) return error;
         log.info("Detecting PII in text of length {}", text.length());
         List<DetectionResult> results = sensitiveDataDetector.detect(text);
         log.info("Detection found {} result(s)", results.size());
