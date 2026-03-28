@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import com.example.project.demo.client.AiVerificationClient;
 import com.example.project.demo.model.DetectionResult;
@@ -44,14 +45,16 @@ public class Controller {
 
     // main entry
     @GetMapping("clean")
-    public ResponseEntity<String> cleanText(@RequestParam(required = false) String text) {
+    public Mono<ResponseEntity<String>> cleanText(@RequestParam(required = false) String text) {
         ResponseEntity<String> error = validateTextParam(text, "clean");
-        if (error != null) return error;
+        if (error != null) return Mono.just(error);
         log.info("Sanitizing text of length {}", text.length());
         String layer1 = textSanitizer.sanitize(text);
-        String result = aiVerificationClient.verify(layer1);
-        log.info("Sanitization complete");
-        return ResponseEntity.ok(result);
+        return aiVerificationClient.verify(layer1)
+            .map(result -> {
+                log.info("Sanitization complete");
+                return ResponseEntity.ok(result);
+            });
     }
 
     @GetMapping("detect")

@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 /**
  * Sends text to the external AI service for a second verification pass.
@@ -19,8 +20,8 @@ public class AiVerificationClient {
     public AiVerificationClient(@Value("${ai.service.url}") String baseUrl) {
         this.webClient = WebClient.builder().baseUrl(baseUrl).build();
     }
-    
-    public String verify(String text) {
+
+    public Mono<String> verify(String text) {
         return webClient.get()
             .uri(uriBuilder -> uriBuilder.path("/verify").queryParam("text", text).build())
             .retrieve()
@@ -28,9 +29,8 @@ public class AiVerificationClient {
             .map(VerifyResponse::cleaned)
             .onErrorResume(e -> {
                 log.warn("AI verification failed, falling back to layer-1 result: {}", e.getMessage());
-                return reactor.core.publisher.Mono.just(text);
-            })
-            .block();
+                return Mono.just(text);
+            });
     }
 
     record VerifyResponse(String original, String cleaned, Object detections) {}

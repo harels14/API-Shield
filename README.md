@@ -46,6 +46,13 @@ kubectl apply -f k8s/
 kubectl get service spring-service -n api-shield
 ```
 
+The service is exposed internally via ClusterIP. Other services in the cluster reach it at `http://spring-service.api-shield.svc.cluster.local`.
+
+For local testing:
+```bash
+kubectl port-forward svc/spring-service 8080:80 -n api-shield
+```
+
 ---
 
 ## Usage

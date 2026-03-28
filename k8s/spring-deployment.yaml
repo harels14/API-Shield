@@ -38,7 +38,7 @@ metadata:
   name: spring-service
   namespace: api-shield
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: spring-service
   ports:
